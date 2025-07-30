@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OnlyFarmers.in - Agricultural Land & Cattle Listings</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/4b8b0b6e2a.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-50 flex flex-col min-h-screen">
+  <!-- Navbar -->
+  <nav class="bg-green-900 text-white px-4 py-3 flex justify-between items-center">
+    <div class="flex items-center space-x-2">
+      <span class="font-bold text-2xl">OnlyFarmers.in</span>
+    </div>
+    <div class="hidden md:flex space-x-6">
+      <a href="#" class="hover:text-yellow-300">Home</a>
+      <a href="land-listings.html" class="hover:text-yellow-300">Agricultural Land</a>
+      <a href="cattle-listings.html" class="hover:text-yellow-300">Cattle</a>
+      <a href="login.html" class="hover:text-yellow-300">Agent Login</a>
+      <a href="#contact" class="hover:text-yellow-300">Contact</a>
+    </div>
+    <button id="nav-toggle" class="md:hidden focus:outline-none">
+      <i class="fas fa-bars text-2xl"></i>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="md:hidden hidden bg-green-800 text-white px-4 py-2">
+    <a href="#" class="block py-1 hover:text-yellow-300">Home</a>
+    <a href="land-listings.html" class="block py-1 hover:text-yellow-300">Agricultural Land</a>
+    <a href="cattle-listings.html" class="block py-1 hover:text-yellow-300">Cattle</a>
+    <a href="agent-dashboard.html" class="block py-1 hover:text-yellow-300">Agent Login</a>
+    <a href="#contact" class="block py-1 hover:text-yellow-300">Contact</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="relative h-96 flex items-center justify-center text-center" style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;">
+    <div class="absolute inset-0 bg-green-900 bg-opacity-60"></div>
+    <div class="relative z-10 text-white px-4">
+      <h1 class="text-3xl md:text-5xl font-bold mb-4">India's #1 Platform for Agricultural Land and Cattle Listings</h1>
+      <a href="create-listing.html" class="inline-block bg-yellow-400 text-green-900 font-semibold px-6 py-3 rounded shadow hover:bg-yellow-300 transition">List Your Property</a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-12 bg-white" id="features">
+    <div class="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Land Listings Card -->
+      <div id="land" class="bg-green-50 rounded-lg shadow p-6 flex flex-col items-center text-center">
+        <div class="bg-green-200 rounded-full p-4 mb-4">
+          <i class="fas fa-tractor text-3xl text-green-800"></i>
+        </div>
+        <h2 class="text-xl font-bold mb-2">Agricultural Land Listings</h2>
+        <p class="text-gray-700">Find and list fertile agricultural land across rural India. Verified listings, transparent deals.</p>
+      </div>
+      <!-- Cattle Listings Card -->
+      <div id="cattle" class="bg-yellow-50 rounded-lg shadow p-6 flex flex-col items-center text-center">
+        <div class="bg-yellow-200 rounded-full p-4 mb-4">
+          <i class="fas fa-cow text-3xl text-yellow-800"></i>
+        </div>
+        <h2 class="text-xl font-bold mb-2">Cattle Listings</h2>
+        <p class="text-gray-700">Buy and sell healthy cattle directly from trusted farmers. Cows, buffaloes, goats, and more.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-12 bg-gray-100" id="testimonials">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-2xl font-bold text-center mb-8">Farmer Success Stories</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Farmer 1" class="w-20 h-20 rounded-full mb-4 border-4 border-green-200" />
+          <p class="text-gray-700 italic mb-2">"I sold my land within a week! OnlyFarmers.in made the process easy and trustworthy."</p>
+          <span class="font-semibold text-green-900">Ramesh Kumar, Punjab</span>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Farmer 2" class="w-20 h-20 rounded-full mb-4 border-4 border-yellow-200" />
+          <p class="text-gray-700 italic mb-2">"Found healthy cows for my dairy farm at a great price. Highly recommend!"</p>
+          <span class="font-semibold text-yellow-800">Sunita Devi, Maharashtra</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-green-900 text-white mt-auto">
+    <div class="max-w-5xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center">
+      <div class="mb-4 md:mb-0">
+        <span class="font-bold">OnlyFarmers.in</span> &copy; 2024
+      </div>
+      <div class="flex space-x-4 mb-4 md:mb-0">
+        <a href="#" class="hover:text-yellow-300"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="hover:text-yellow-300"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="hover:text-yellow-300"><i class="fab fa-instagram"></i></a>
+      </div>
+      <div id="contact" class="text-sm">
+        <a href="mailto:contact@onlyfarmers.in" class="hover:text-yellow-300">contact@onlyfarmers.in</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Nav Toggle Script -->
+  <script>
+    const navToggle = document.getElementById('nav-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    navToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html> 

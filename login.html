@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | OnlyFarmers.in</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-green-50 min-h-screen flex flex-col justify-center items-center">
+  <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-8 mt-12">
+    <div class="flex justify-center mb-6">
+      <button id="farmerTab" class="px-4 py-2 font-semibold rounded-l-lg focus:outline-none bg-green-700 text-white">Farmer Login</button>
+      <button id="agentTab" class="px-4 py-2 font-semibold rounded-r-lg focus:outline-none bg-green-100 text-green-800">Agent Login</button>
+    </div>
+    <!-- Farmer Login Form -->
+    <form id="farmerForm" class="space-y-5">
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Email</label>
+        <input type="email" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Enter your email" />
+      </div>
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Password</label>
+        <input type="password" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Enter your password" />
+      </div>
+      <button type="submit" class="w-full bg-green-700 text-white font-semibold py-2 rounded hover:bg-green-800 transition">Login</button>
+      <div class="text-center mt-2">
+        <a href="register.html" class="text-green-700 hover:underline">Register as Farmer</a>
+      </div>
+    </form>
+    <!-- Agent Login Form -->
+    <form id="agentForm" class="space-y-5 hidden">
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Email</label>
+        <input type="email" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Enter your email" />
+      </div>
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Password</label>
+        <input type="password" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Enter your password" />
+      </div>
+      <button type="submit" class="w-full bg-green-700 text-white font-semibold py-2 rounded hover:bg-green-800 transition">Login</button>
+      <div class="text-center mt-2">
+        <a href="register.html" class="text-green-700 hover:underline">Register as Agent</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Tab switching logic
+    const farmerTab = document.getElementById('farmerTab');
+    const agentTab = document.getElementById('agentTab');
+    const farmerForm = document.getElementById('farmerForm');
+    const agentForm = document.getElementById('agentForm');
+
+    farmerTab.addEventListener('click', () => {
+      farmerTab.classList.add('bg-green-700', 'text-white');
+      farmerTab.classList.remove('bg-green-100', 'text-green-800');
+      agentTab.classList.remove('bg-green-700', 'text-white');
+      agentTab.classList.add('bg-green-100', 'text-green-800');
+      farmerForm.classList.remove('hidden');
+      agentForm.classList.add('hidden');
+    });
+
+    agentTab.addEventListener('click', () => {
+      agentTab.classList.add('bg-green-700', 'text-white');
+      agentTab.classList.remove('bg-green-100', 'text-green-800');
+      farmerTab.classList.remove('bg-green-700', 'text-white');
+      farmerTab.classList.add('bg-green-100', 'text-green-800');
+      agentForm.classList.remove('hidden');
+      farmerForm.classList.add('hidden');
+    });
+
+    // Placeholder for Firebase Auth logic
+    document.getElementById('farmerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // TODO: Add Firebase authentication logic for Farmer Login here
+      alert('Farmer login logic goes here (Firebase Auth placeholder)');
+    });
+    document.getElementById('agentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // TODO: Add Firebase authentication logic for Agent Login here
+      alert('Agent login logic goes here (Firebase Auth placeholder)');
+    });
+  </script>
+</body>
+</html> 
