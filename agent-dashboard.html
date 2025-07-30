@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Dashboard | OnlyFarmers.in</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-green-50 min-h-screen flex flex-col">
+  <nav class="bg-green-900 text-white px-4 py-3 flex justify-between items-center">
+    <span class="font-bold text-2xl">OnlyFarmers.in</span>
+    <div class="hidden md:flex space-x-6">
+      <a href="index.html" class="hover:text-yellow-300">Home</a>
+      <a href="agent-dashboard.html" class="hover:text-yellow-300 font-semibold underline">Agent Dashboard</a>
+      <a href="login.html" id="logoutBtn" class="hover:text-yellow-300">Logout</a>
+    </div>
+  </nav>
+  <main class="flex-1 max-w-5xl mx-auto w-full px-4 py-8">
+    <h1 class="text-2xl font-bold text-green-900 mb-6">Agent Dashboard</h1>
+    <div id="accessDenied" class="hidden text-red-600 text-center font-semibold">Access denied. Only verified agents can view this page.</div>
+    <div id="dashboardContent" class="hidden">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-semibold">Your Listings</h2>
+        <button id="addListingBtn" class="bg-green-700 text-white px-4 py-2 rounded font-semibold hover:bg-green-800 transition">Add New Listing</button>
+      </div>
+      <div id="listings" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <!-- Listings will be rendered here -->
+      </div>
+      <!-- Add/Edit Listing Modal -->
+      <div id="listingModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg relative">
+          <button id="closeModalBtn" class="absolute top-2 right-2 text-gray-500 hover:text-red-600 text-xl">&times;</button>
+          <h3 id="modalTitle" class="text-lg font-bold mb-4">Add Listing</h3>
+          <form id="listingForm" class="space-y-4">
+            <div>
+              <label class="block text-gray-700 font-medium mb-1">Type</label>
+              <select id="listingType" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" required>
+                <option value="land">Agricultural Land</option>
+                <option value="cattle">Cattle</option>
+              </select>
+            </div>
+            <div id="landFields">
+              <label class="block text-gray-700 font-medium mb-1">Title</label>
+              <input type="text" id="landTitle" class="w-full border border-gray-300 rounded px-3 py-2 mb-2" placeholder="e.g. 5 Acres Fertile Land in Punjab" />
+              <label class="block text-gray-700 font-medium mb-1">District</label>
+              <input type="text" id="landDistrict" class="w-full border border-gray-300 rounded px-3 py-2 mb-2" placeholder="e.g. Ludhiana" />
+              <label class="block text-gray-700 font-medium mb-1">Area (in acres)</label>
+              <input type="number" id="landArea" min="0.1" step="0.01" class="w-full border border-gray-300 rounded px-3 py-2 mb-2" placeholder="e.g. 5" />
+              <label class="block text-gray-700 font-medium mb-1">Price (₹)</label>
+              <input type="number" id="landPrice" min="0" class="w-full border border-gray-300 rounded px-3 py-2 mb-2" placeholder="e.g. 3500000" />
+              <label class="block text-gray-700 font-medium mb-1">Description</label>
+              <textarea id="landDescription" class="w-full border border-gray-300 rounded px-3 py-2 mb-2" rows="2" placeholder="Describe your land..."></textarea>
+            </div>
+            <div id="cattleFields" class="hidden">
+              <label class="block text-gray-700 font-medium mb-1">Animal Type</label>
+              <select id="cattleType" class="w-full border border-gray-300 rounded px-3 py-2 mb-2">
+                <option value="Cow">Cow</option>
+                <option value="Buffalo">Buffalo</option>
+                <option value="Hen">Hen</option>
+                <option value="Duck">Duck</option>
+                <option value="Goat">Goat</option>
+                <option value="Sheep">Sheep</option>
+              </select>
+              <label class="block text-gray-700 font-medium mb-1">Breed</label>
+              <input type="text" id="cattleBreed" class="w-full border border-gray-300 rounded px-3 py-2 mb-2" placeholder="e.g. Murrah" />
+              <label class="block text-gray-700 font-medium mb-1">Age (years)</label>
+              <input type="number" id="cattleAge" min="0" step="0.1" class="w-full border border-gray-300 rounded px-3 py-2 mb-2" placeholder="e.g. 3" />
+              <label class="block text-gray-700 font-medium mb-1">Price (₹)</label>
+              <input type="number" id="cattlePrice" min="0" class="w-full border border-gray-300 rounded px-3 py-2 mb-2" placeholder="e.g. 65000" />
+              <label class="block text-gray-700 font-medium mb-1">Location</label>
+              <input type="text" id="cattleLocation" class="w-full border border-gray-300 rounded px-3 py-2 mb-2" placeholder="e.g. Rampur, Meerut" />
+            </div>
+            <button type="submit" class="w-full bg-green-700 text-white font-semibold py-2 rounded hover:bg-green-800 transition">Save Listing</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="bg-green-900 text-white mt-auto">
+    <div class="max-w-5xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center">
+      <div class="mb-4 md:mb-0">
+        <span class="font-bold">OnlyFarmers.in</span> &copy; 2024
+      </div>
+      <div class="flex space-x-4 mb-4 md:mb-0">
+        <a href="#" class="hover:text-yellow-300">Facebook</a>
+        <a href="#" class="hover:text-yellow-300">Twitter</a>
+        <a href="#" class="hover:text-yellow-300">Instagram</a>
+      </div>
+      <div class="text-sm">
+        <a href="mailto:contact@onlyfarmers.in" class="hover:text-yellow-300">contact@onlyfarmers.in</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // --- Auth check (localStorage/Firebase placeholder) ---
+    function isAgentLoggedIn() {
+      // Placeholder: Replace with Firebase Auth check
+      // Example: localStorage.setItem('userRole', 'agent') after login
+      return localStorage.getItem('userRole') === 'agent';
+    }
+    if (!isAgentLoggedIn()) {
+      document.getElementById('accessDenied').classList.remove('hidden');
+      document.getElementById('dashboardContent').classList.add('hidden');
+    } else {
+      document.getElementById('accessDenied').classList.add('hidden');
+      document.getElementById('dashboardContent').classList.remove('hidden');
+    }
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+      // Placeholder: Add Firebase signOut if needed
+      localStorage.removeItem('userRole');
+      window.location.href = 'login.html';
+    });
+    // --- Listing Modal Logic ---
+    const addListingBtn = document.getElementById('addListingBtn');
+    const listingModal = document.getElementById('listingModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const listingForm = document.getElementById('listingForm');
+    const listingType = document.getElementById('listingType');
+    const landFields = document.getElementById('landFields');
+    const cattleFields = document.getElementById('cattleFields');
+    let editIndex = null;
+    function openModal(edit = false, data = null, idx = null) {
+      listingModal.classList.remove('hidden');
+      document.getElementById('modalTitle').textContent = edit ? 'Edit Listing' : 'Add Listing';
+      listingForm.reset();
+      editIndex = idx;
+      if (edit && data) {
+        listingType.value = data.type;
+        if (data.type === 'land') {
+          landFields.querySelector('#landTitle').value = data.title;
+          landFields.querySelector('#landDistrict').value = data.district;
+          landFields.querySelector('#landArea').value = data.area;
+          landFields.querySelector('#landPrice').value = data.price;
+          landFields.querySelector('#landDescription').value = data.description;
+        } else {
+          cattleFields.querySelector('#cattleType').value = data.animalType;
+          cattleFields.querySelector('#cattleBreed').value = data.breed;
+          cattleFields.querySelector('#cattleAge').value = data.age;
+          cattleFields.querySelector('#cattlePrice').value = data.price;
+          cattleFields.querySelector('#cattleLocation').value = data.location;
+        }
+        listingType.dispatchEvent(new Event('change'));
+      }
+    }
+    function closeModal() {
+      listingModal.classList.add('hidden');
+      editIndex = null;
+    }
+    addListingBtn.addEventListener('click', () => openModal(false));
+    closeModalBtn.addEventListener('click', closeModal);
+    listingModal.addEventListener('click', (e) => { if (e.target === listingModal) closeModal(); });
+    listingType.addEventListener('change', function() {
+      if (listingType.value === 'land') {
+        landFields.classList.remove('hidden');
+        cattleFields.classList.add('hidden');
+      } else {
+        landFields.classList.add('hidden');
+        cattleFields.classList.remove('hidden');
+      }
+    });
+    // --- Listings CRUD (localStorage for demo) ---
+    function getAgentListings() {
+      // Placeholder: Replace with Firebase fetch for agent's listings
+      return JSON.parse(localStorage.getItem('agentListings') || '[]');
+    }
+    function saveAgentListings(listings) {
+      // Placeholder: Replace with Firebase save
+      localStorage.setItem('agentListings', JSON.stringify(listings));
+    }
+    function renderListings() {
+      const listings = getAgentListings();
+      const listingsDiv = document.getElementById('listings');
+      listingsDiv.innerHTML = '';
+      if (listings.length === 0) {
+        listingsDiv.innerHTML = '<div class="col-span-full text-gray-500 text-center">No listings found.</div>';
+        return;
+      }
+      listings.forEach((listing, idx) => {
+        let html = '';
+        if (listing.type === 'land') {
+          html = `<div class="bg-white rounded-lg shadow p-4 flex flex-col">
+            <h3 class="font-bold text-green-800 mb-1">${listing.title}</h3>
+            <div class="text-sm text-gray-600 mb-1">District: ${listing.district}</div>
+            <div class="text-sm text-gray-600 mb-1">Area: ${listing.area} acres</div>
+            <div class="text-green-700 font-semibold mb-1">₹${listing.price}</div>
+            <div class="text-gray-700 text-sm mb-2">${listing.description}</div>
+            <div class="flex space-x-2 mt-auto">
+              <button onclick="editListing(${idx})" class="bg-yellow-400 text-green-900 px-3 py-1 rounded hover:bg-yellow-300">Edit</button>
+              <button onclick="deleteListing(${idx})" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</button>
+            </div>
+          </div>`;
+        } else {
+          html = `<div class="bg-white rounded-lg shadow p-4 flex flex-col">
+            <h3 class="font-bold text-green-800 mb-1">${listing.animalType} (${listing.breed})</h3>
+            <div class="text-sm text-gray-600 mb-1">Age: ${listing.age} years</div>
+            <div class="text-green-700 font-semibold mb-1">₹${listing.price}</div>
+            <div class="text-sm text-gray-600 mb-1">Location: ${listing.location}</div>
+            <div class="flex space-x-2 mt-auto">
+              <button onclick="editListing(${idx})" class="bg-yellow-400 text-green-900 px-3 py-1 rounded hover:bg-yellow-300">Edit</button>
+              <button onclick="deleteListing(${idx})" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</button>
+            </div>
+          </div>`;
+        }
+        listingsDiv.innerHTML += html;
+      });
+    }
+    window.editListing = function(idx) {
+      const listings = getAgentListings();
+      openModal(true, listings[idx], idx);
+    };
+    window.deleteListing = function(idx) {
+      if (confirm('Are you sure you want to delete this listing?')) {
+        const listings = getAgentListings();
+        listings.splice(idx, 1);
+        saveAgentListings(listings);
+        renderListings();
+      }
+    };
+    listingForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const type = listingType.value;
+      let listing = { type };
+      if (type === 'land') {
+        listing.title = document.getElementById('landTitle').value;
+        listing.district = document.getElementById('landDistrict').value;
+        listing.area = document.getElementById('landArea').value;
+        listing.price = document.getElementById('landPrice').value;
+        listing.description = document.getElementById('landDescription').value;
+      } else {
+        listing.animalType = document.getElementById('cattleType').value;
+        listing.breed = document.getElementById('cattleBreed').value;
+        listing.age = document.getElementById('cattleAge').value;
+        listing.price = document.getElementById('cattlePrice').value;
+        listing.location = document.getElementById('cattleLocation').value;
+      }
+      let listings = getAgentListings();
+      if (editIndex !== null) {
+        listings[editIndex] = listing;
+      } else {
+        listings.push(listing);
+      }
+      saveAgentListings(listings);
+      renderListings();
+      closeModal();
+    });
+    // Initial render
+    if (isAgentLoggedIn()) renderListings();
+  </script>
+</body>
+</html> 
