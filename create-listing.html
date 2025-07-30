@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Listing | OnlyFarmers.in</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-green-50 min-h-screen flex flex-col justify-center items-center">
+  <div class="w-full max-w-xl bg-white rounded-lg shadow-lg p-8 mt-10">
+    <h2 class="text-2xl font-bold text-green-800 mb-6 text-center">Create a Listing</h2>
+    <div class="flex justify-center mb-6">
+      <button id="landTab" class="px-4 py-2 font-semibold rounded-l-lg focus:outline-none bg-green-700 text-white">Agricultural Land</button>
+      <button id="cattleTab" class="px-4 py-2 font-semibold rounded-r-lg focus:outline-none bg-green-100 text-green-800">Cattle</button>
+    </div>
+    <!-- Land Listing Form -->
+    <form id="landForm" class="space-y-5">
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Title</label>
+        <input type="text" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="e.g. 5 Acres Fertile Land in Punjab" required />
+      </div>
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">District</label>
+        <input type="text" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="e.g. Ludhiana" required />
+      </div>
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Area (in acres)</label>
+        <input type="number" min="0.1" step="0.01" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="e.g. 5" required />
+      </div>
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Price (₹)</label>
+        <input type="number" min="0" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="e.g. 3500000" required />
+      </div>
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Description</label>
+        <textarea class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" rows="3" placeholder="Describe your land..." required></textarea>
+      </div>
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Image Upload</label>
+        <input type="file" accept="image/*" class="w-full border border-gray-300 rounded px-3 py-2" required />
+      </div>
+      <button type="submit" class="w-full bg-green-700 text-white font-semibold py-2 rounded hover:bg-green-800 transition">Submit Land Listing</button>
+    </form>
+    <!-- Cattle Listing Form -->
+    <form id="cattleForm" class="space-y-5 hidden">
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Animal Type</label>
+        <select class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" required>
+          <option value="">Select Type</option>
+          <option value="Cow">Cow</option>
+          <option value="Buffalo">Buffalo</option>
+          <option value="Hen">Hen</option>
+          <option value="Duck">Duck</option>
+          <option value="Goat">Goat</option>
+          <option value="Sheep">Sheep</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Breed</label>
+        <input type="text" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="e.g. Murrah" required />
+      </div>
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Age (years)</label>
+        <input type="number" min="0" step="0.1" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="e.g. 3" required />
+      </div>
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Price (₹)</label>
+        <input type="number" min="0" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="e.g. 65000" required />
+      </div>
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Location</label>
+        <input type="text" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="e.g. Rampur, Meerut" required />
+      </div>
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Image Upload</label>
+        <input type="file" accept="image/*" class="w-full border border-gray-300 rounded px-3 py-2" required />
+      </div>
+      <button type="submit" class="w-full bg-green-700 text-white font-semibold py-2 rounded hover:bg-green-800 transition">Submit Cattle Listing</button>
+    </form>
+  </div>
+  <script>
+    // Tab switching logic
+    const landTab = document.getElementById('landTab');
+    const cattleTab = document.getElementById('cattleTab');
+    const landForm = document.getElementById('landForm');
+    const cattleForm = document.getElementById('cattleForm');
+
+    landTab.addEventListener('click', () => {
+      landTab.classList.add('bg-green-700', 'text-white');
+      landTab.classList.remove('bg-green-100', 'text-green-800');
+      cattleTab.classList.remove('bg-green-700', 'text-white');
+      cattleTab.classList.add('bg-green-100', 'text-green-800');
+      landForm.classList.remove('hidden');
+      cattleForm.classList.add('hidden');
+    });
+
+    cattleTab.addEventListener('click', () => {
+      cattleTab.classList.add('bg-green-700', 'text-white');
+      cattleTab.classList.remove('bg-green-100', 'text-green-800');
+      landTab.classList.remove('bg-green-700', 'text-white');
+      landTab.classList.add('bg-green-100', 'text-green-800');
+      cattleForm.classList.remove('hidden');
+      landForm.classList.add('hidden');
+    });
+
+    // Simple submit handlers
+    landForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Agricultural Land Listing submitted!');
+      landForm.reset();
+    });
+    cattleForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Cattle Listing submitted!');
+      cattleForm.reset();
+    });
+  </script>
+</body>
+</html> 
